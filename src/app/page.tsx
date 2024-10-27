@@ -74,7 +74,9 @@ const Header = () => {
               ))}
             </nav>
 
-            <Button className="hidden md:inline-flex">Termin vereinbaren</Button>
+            <Button className="hidden md:inline-flex" onClick={() => scrollToSection('#contact')}>
+              Termin vereinbaren
+            </Button>
 
             {/* Mobile Menu Button */}
             <button
@@ -264,6 +266,7 @@ const About = () => (
   </section>
 )
 
+
 const Contact = forwardRef<HTMLDivElement>((props, ref) => {
   const [formData, setFormData] = useState({
     vorname: '',
@@ -277,6 +280,7 @@ const Contact = forwardRef<HTMLDivElement>((props, ref) => {
       outdoorTraining: false,
     },
   })
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -294,92 +298,116 @@ const Contact = forwardRef<HTMLDivElement>((props, ref) => {
     e.preventDefault()
     console.log('Form submitted:', formData)
     // Here you would typically send the form data to your backend
+    // For now, we'll simulate a successful submission
+    setTimeout(() => {
+      setIsSubmitted(true)
+    }, 1000)
   }
+
+  const SuccessMessage = () => (
+    <Card className="max-w-md mx-auto bg-white text-gray-800 shadow-lg rounded-lg">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl font-bold">Vielen Dank für deine Anfrage!</CardTitle>
+        <CardDescription className="text-lg">Deine Nachricht wurde erfolgreich übermittelt.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-center">
+          Wir schätzen dein Interesse an unseren Dienstleistungen. Unser Team wird sich in Kürze bei dir melden.
+        </p>
+      </CardContent>
+      <CardFooter className="flex justify-center">
+        <Button className="bg-primary text-white hover:bg-primary-dark">Zurück zur Startseite</Button>
+      </CardFooter>
+    </Card>
+  )
 
   return (
     <section id="contact" ref={ref} className="py-16 bg-muted">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-6 bg-white p-8 rounded-lg shadow-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {isSubmitted ? (
+          <SuccessMessage />
+        ) : (
+          <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-6 bg-white p-8 rounded-lg shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="vorname">Vorname</Label>
+                <Input
+                  id="vorname"
+                  name="vorname"
+                  value={formData.vorname}
+                  onChange={handleInputChange}
+                  required
+                  className="mt-1"
+                />
+              </div>
+              <div>
+                <Label htmlFor="nachname">Nachname</Label>
+                <Input
+                  id="nachname"
+                  name="nachname"
+                  value={formData.nachname}
+                  onChange={handleInputChange}
+                  required
+                  className="mt-1"
+                />
+              </div>
+            </div>
             <div>
-              <Label htmlFor="vorname" className="block text-sm font-medium text-gray-700">Vorname</Label>
+              <Label htmlFor="email">Email Address</Label>
               <Input
-                id="vorname"
-                name="vorname"
-                value={formData.vorname}
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                className="mt-1"
               />
             </div>
             <div>
-              <Label htmlFor="nachname" className="block text-sm font-medium text-gray-700">Nachname</Label>
+              <Label htmlFor="phone">Phone Number</Label>
               <Input
-                id="nachname"
-                name="nachname"
-                value={formData.nachname}
+                id="phone"
+                name="phone"
+                type="tel"
+                value={formData.phone}
                 onChange={handleInputChange}
                 required
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+                className="mt-1"
               />
             </div>
-          </div>
-          <div>
-            <Label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            />
-          </div>
-          <div>
-            <Label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</Label>
-            <Input
-              id="phone"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleInputChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            />
-          </div>
-          <div>
-            <Label className="block text-sm font-medium text-gray-700">Service Interest</Label>
-            <div className="space-y-2 mt-2">
-              {Object.entries(formData.services).map(([key, value]) => (
-                <div key={key} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={key}
-                    checked={value}
-                    onCheckedChange={() => handleCheckboxChange(key as keyof typeof formData.services)}
-                    className="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
-                  />
-                  <Label htmlFor={key} className="text-sm text-gray-700">{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</Label>
-                </div>
-              ))}
+            <div>
+              <Label>Service Interest</Label>
+              <div className="space-y-2 mt-2">
+                {Object.entries(formData.services).map(([key, value]) => (
+                  <div key={key} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={key}
+                      checked={value}
+                      onCheckedChange={() => handleCheckboxChange(key as keyof typeof formData.services)}
+                    />
+                    <Label htmlFor={key}>{key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}</Label>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <Label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</Label>
-            <Textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleInputChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            />
-          </div>
-          <Button type="submit" className="w-full bg-primary text-white py-2 rounded-md shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-            Send Message
-          </Button>
-        </form>
+            <div>
+              <Label htmlFor="message">Message</Label>
+              <Textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+                className="mt-1"
+              />
+            </div>
+            <Button type="submit" className="w-full">
+              Send Message
+            </Button>
+          </form>
+        )}
       </div>
     </section>
   )
