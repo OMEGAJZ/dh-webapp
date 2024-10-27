@@ -249,7 +249,7 @@ const About = () => (
         <div className="md:w-1/2 max-w-md">
           <div className="relative w-full h-96 overflow-hidden rounded-lg shadow-lg">
             <Image
-              src="/dhcoach.jpg"
+              src="/dh-webapp/dhcoach.jpg"
               alt="Company Leader"
               layout="fill"
               objectFit="cover"
