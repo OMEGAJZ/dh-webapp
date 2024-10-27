@@ -167,7 +167,7 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
       description: 'One-on-one training sessions tailored to your goals',
       price: '€60',
       period: 'per session',
-      image: '/dh-webapp/personaltraining.jpg',
+      image: '/dh-webapp/pesonaltrain.jpg',
       features: ['Customized workout plans', 'Progress tracking', 'Nutritional advice'],
     },
     {
@@ -183,7 +183,7 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
       description: 'Group training sessions in nature',
       price: '€40',
       period: 'per session',
-      image: '/dh-webapp/putdoortrain.jpg',
+      image: '/dh-webapp/outdoortraining.jpg',
       features: ['Small group sessions', 'Varied workout locations', 'Equipment provided'],
     },
   ]
