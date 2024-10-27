@@ -10,6 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { CheckCircle2 } from 'lucide-react'
 import {
   Accordion,
   AccordionContent,
@@ -166,7 +167,8 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
       description: 'One-on-one training sessions tailored to your goals',
       price: '€60',
       period: 'per session',
-      image: '/dh-webapp/pesonaltrain.jpg',
+      image: '/dh-webapp/personaltraining.jpg',
+      features: ['Customized workout plans', 'Progress tracking', 'Nutritional advice'],
     },
     {
       title: 'Nutrition Consulting',
@@ -174,43 +176,57 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
       price: '€80',
       period: 'per month',
       image: '/dh-webapp/food.jpg',
+      features: ['Customized meal plans', 'Nutritional education', 'Regular check-ins'],
     },
     {
       title: 'Outdoor Training',
       description: 'Group training sessions in nature',
       price: '€40',
       period: 'per session',
-      image: '/dh-webapp/outdoortraining.jpg',
+      image: '/dh-webapp/putdoortrain.jpg',
+      features: ['Small group sessions', 'Varied workout locations', 'Equipment provided'],
     },
   ]
 
   return (
-    <section id="services" className="py-16 bg-muted">
+    <section id="services" className="py-24 bg-gradient-to-b from-background to-muted">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <h2 className="text-4xl font-bold text-center mb-16">Our Services</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="flex flex-col">
-              <Image
-                src={service.image}
-                alt={service.title}
-                width={400}
-                height={300}
-                className="object-cover h-48 w-full rounded-t-lg"
-              />
-              <CardHeader>
-                <CardTitle>{service.title}</CardTitle>
-                <CardDescription>{service.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-4xl font-bold">{service.price}</p>
-                <p className="text-muted-foreground">{service.period}</p>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full" onClick={scrollToContact}>
-                  Get Started
-                </Button>
-              </CardFooter>
+            <Card key={index} className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+              <div className="relative pt-[56.25%]">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="absolute top-0 left-0 w-full h-full transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div className="flex flex-col flex-grow">
+                <CardHeader>
+                  <CardTitle className="text-xl md:text-2xl">{service.title}</CardTitle>
+                  <CardDescription>{service.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <p className="text-3xl md:text-4xl font-bold text-primary mb-2">{service.price}</p>
+                  <p className="text-muted-foreground mb-4">{service.period}</p>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, index) => (
+                      <li key={index} className="flex items-center text-sm md:text-base">
+                        <CheckCircle2 className="text-primary mr-2 flex-shrink-0" size={16} />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardFooter className="mt-auto">
+                  <Button className="w-full" onClick={scrollToContact}>
+                    Get Started
+                  </Button>
+                </CardFooter>
+              </div>
             </Card>
           ))}
         </div>
@@ -218,6 +234,7 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
     </section>
   )
 }
+
 
 const About = () => (
   <section id="about" className="py-16 bg-background">
