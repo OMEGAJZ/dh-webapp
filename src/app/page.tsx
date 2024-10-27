@@ -166,7 +166,7 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
       description: 'One-on-one training sessions tailored to your goals',
       price: '€60',
       period: 'per session',
-      image: '../public/pesonal_train.jpg',
+      image: '../public/pesonaltrain.jpg',
     },
     {
       title: 'Nutrition Consulting',
@@ -180,7 +180,7 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
       description: 'Group training sessions in nature',
       price: '€40',
       period: 'per session',
-      image: '../public/outdoor-training.jpg',
+      image: '../public/outdoortraining.jpg',
     },
   ]
 
