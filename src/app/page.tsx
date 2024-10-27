@@ -141,7 +141,7 @@ const Hero = () => {
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('dh_webapp/public/landingpage.jpg')",
+          backgroundImage: "url('public/landingpage.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
