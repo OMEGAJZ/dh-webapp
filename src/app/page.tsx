@@ -141,7 +141,7 @@ const Hero = () => {
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('omegajz/landingpage.jpg')",
+          backgroundImage: "url('/dh-webapp/landingpage.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -166,21 +166,21 @@ const Pricing = ({ scrollToContact }: { scrollToContact: () => void }) => {
       description: 'One-on-one training sessions tailored to your goals',
       price: '€60',
       period: 'per session',
-      image: 'omegajz/pesonaltrain.jpg',
+      image: '/dh-webapp/pesonaltrain.jpg',
     },
     {
       title: 'Nutrition Consulting',
       description: 'Personalized meal plans and nutritional guidance',
       price: '€80',
       period: 'per month',
-      image: 'omegajz/food.jpg',
+      image: '/dh-webapp/food.jpg',
     },
     {
       title: 'Outdoor Training',
       description: 'Group training sessions in nature',
       price: '€40',
       period: 'per session',
-      image: 'omegajz/outdoortraining.jpg',
+      image: '/dh-webapp/outdoortraining.jpg',
     },
   ]
 
