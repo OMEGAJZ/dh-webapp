@@ -1,4 +1,4 @@
-'use client'
+'use client' /* this is the git deployment version with changed jpg paths */
 
 import { useRef, useState, forwardRef, useEffect } from 'react'
 import Image from 'next/image'
